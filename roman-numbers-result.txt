@@ -1,0 +1,9 @@
+'' It's not a valid roman number
+CMXCIX
+L
+Not a valid number or it's too high
+'XC' It's not a valid roman number
+'MLX' It's not a valid roman number
+'{}' It's not a valid roman number
+[''] It's not a valid roman number
+'.' It's not a valid roman number
