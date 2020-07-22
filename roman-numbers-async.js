@@ -1,18 +1,23 @@
 'use strict';
 const fs = require('fs');
+const util = require('util');
 
 // We read the values from another file
-let data = fs.readFileSync('to-convert.txt', 'utf-8'); 
 let toConvertArr;
+fs.readFile('to-convert.txt', 'utf-8', (err, data) => {
+    if (err) {
+        console.error('Error', err.code)
+    } else {
+        // We save the data on an array separating the lines into pieces to later pass the values to the function
+        if (data.match(/(\r\n)/g)) {
+            toConvertArr = data.split('\r\n'); // Windows
+        } else {
+            toConvertArr = data.split('\n'); // Mac or Linux
+        }
+        console.log(toConvertArr);
+    }
+})
 
-// We save the data on an array separating the lines into pieces to later pass the values to the function
-if (data.match(/(\r\n)/g)) {
-    toConvertArr = data.split('\r\n'); // Windows
-} else {
-    toConvertArr = data.split('\n'); // Mac or Linux
-}
-
-console.log(toConvertArr);
 
 // An object with the equivalents
 const romanEquivalentsOnArabic = {
@@ -85,22 +90,33 @@ function numberConverter (numToConvert, result = '') {
 let resultStr = '';
 
 // Executing the numberConverter using the values read
-if (toConvertArr != null) {
-    toConvertArr.map(numToConvert => {
-        let toNumber = parseInt(numToConvert);
-        if (toNumber) {
-            // If the value is a valid number, we will pass it as a number
-            let result = numberConverter(toNumber);
-            resultStr += result + '\n';
-        } else {
-            // If not, we will pass it as a string
-            let result = numberConverter(numToConvert);
-            resultStr += result + '\n';
-        }
-    })
-}
+setTimeout(() => {
+    if (toConvertArr != null) {
+        toConvertArr.map(numToConvert => {
+            let toNumber = parseInt(numToConvert);
+            if (toNumber) {
+                // If the value is a valid number, we will pass it as a number
+                let result = numberConverter(toNumber);
+                resultStr += result + '\n';
+            } else {
+                // If not, we will pass it as a string
+                let result = numberConverter(numToConvert);
+                resultStr += result + '\n';
+            }
+        })
+    }
+}, 1000);
 
 console.log(resultStr);
 
 // Finally, we will write the result's array on another file
-fs.writeFileSync('roman-numbers-result.txt', resultStr);
+setTimeout(() => {
+    fs.writeFile('roman-numbers-result.txt', 'ASYNC: \n' + resultStr, (err, data) => {
+        if (err) {
+            console.error('Error', err.code)
+        } else {
+            console.log('Writed in file');
+            return;
+        }
+    });
+}, 2000);
