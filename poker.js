@@ -1,4 +1,5 @@
 'use strict';
+const fs = require('fs');
 
 const order = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'];
 
@@ -92,7 +93,7 @@ function resolveHand(hand) {
     Object.values(hands).map(hand => {
         // Escalera de color Ej: ['D2', 'D3', 'D4', 'D5', 'D6', 'S7', 'HQ']
         if (hand.length == 5) {
-            if (hand.every(card => card[1] == hand[hand.indexOf(card) + 1][1])) {
+            if (hand.every(card => card[1] + 1 == hand[hand.indexOf(card) + 1][1])) {
                 state = 'Straight Flash';
             } else {
                 state = 'Flush';
@@ -109,8 +110,11 @@ function resolveHand(hand) {
 
 let stateOrder = ['High Card', 'Pair', 'Two pairs', 'Three of a kind', 'Straight', 'Flush', 'Full House', 'Four of a kind', 'Straight Flash'];
 
-resolveHand(['D2', 'D3', 'D4', 'D5', 'D6', 'S7', 'HQ']);
-resolveHand(handTwo);
+let resolvedHand = resolveHand(['D2', 'D3', 'D4', 'D5', 'D6', 'S7', 'HQ']);
+let resolvedHandTwo = resolveHand(handTwo);
+
+// Finally, we will write the result's array on another file
+fs.writeFileSync('poker-result.txt', 'SYNC: \n' + resolvedHand + '\n' + resolvedHandTwo);
 
 /* Reglas */
 
