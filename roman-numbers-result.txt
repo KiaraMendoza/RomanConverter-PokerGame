@@ -1,10 +1,10 @@
-SYNC: 
-'' It's not a valid roman number
+ASYNC: 
+Not a valid number or it's too high
 CMXCIX
 L
 Not a valid number or it's too high
-'XC' It's not a valid roman number
-'MLX' It's not a valid roman number
-'{}' It's not a valid roman number
-[''] It's not a valid roman number
-'.' It's not a valid roman number
+90
+1060
+Not a valid number or it's too high
+Not a valid number or it's too high
+Not a valid number or it's too high
