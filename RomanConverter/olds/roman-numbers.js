@@ -1,23 +1,29 @@
-const { romanToArabic } = require('../helpers/romanToArabic');
-const { arabicToRoman } = require('../helpers/arabicToRoman');
-const { romanEquivalentsOnArabic } = require('./equivalents');
-
-/**
- * Function that converts roman numbers to an arabic number
- * at first it verifies if the given string is a valid roman number
- * using a regex expression, if thats true, it succesfully resolves the conversion
- * and returns an string.
- *
- * @param {string} romanStr
- * @returns {string}
-*/
+const { romanToInteger } = require('./romanToInteger');
+const { integerToRoman } = require('./integerToRoman');
 
 exports.romanNumbers = (toConvertArr) => {
+
+    // An object with the equivalents
+    const romanEquivalentsOnArabic = {
+        'M': 1000,
+        'CM': 900,
+        'D': 500,
+        'CD': 400,
+        'C': 100,
+        'XC': 90,
+        'L': 50,
+        'XL': 40,
+        'X': 10,
+        'IX': 9,
+        'V': 5,
+        'IV': 4,
+        'I': 1
+    }
 
     // The function for converting, we will pass it a 'numToConvert', the second argument is just for a later-internal use.
     function numberConverter(numToConvert, result = '') {
         if (typeof numToConvert === 'string') {
-            return romanToArabic(numToConvert);
+            return romanToInteger(numToConvert);
         } else if (typeof numToConvert === 'number' && numToConvert <= 3999) {  // Converting roman to arabic
             for (const roman in romanEquivalentsOnArabic) {
                 if (numToConvert >= romanEquivalentsOnArabic[roman]) {
