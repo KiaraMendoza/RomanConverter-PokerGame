@@ -1,0 +1,7 @@
+SYNC: 
+999 is CMXCIX
+50 is L
+9999 is NOT a valid number.
+XC is 90
+MLX is 1060
+X is 10
