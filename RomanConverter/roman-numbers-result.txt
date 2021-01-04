@@ -1,10 +1,7 @@
 SYNC: 
-Not a valid number or it's too high
-CMXCIX
-L
-Not a valid number or it's too high
-90
-1060
-Not a valid number or it's too high
-Not a valid number or it's too high
-Not a valid number or it's too high
+999 is CMXCIX
+50 is L
+9999 is NOT a valid number.
+XC is 90
+MLX is 1060
+X is 10

@@ -1,22 +1,15 @@
 'use strict';
 const fs = require('fs');
-const { romanNumbers } = require('./roman-numbers');
+const { numberConverter } = require('./numberConverter');
 
-// We read the values from another file
-let data = fs.readFileSync('to-convert.txt', 'utf-8'); 
+// We read the values from another file.
+let data = fs.readFileSync('to-convert.json', 'utf-8'); 
 
-let toConvertArr;
+// And parse the data to get a usable array.
+let toConvertArr = JSON.parse(data);
 
-// We save the data on an array separating the lines into pieces to later pass the values to the function
-if (data.match(/(\r\n)/g)) {
-    toConvertArr = data.split('\r\n'); // Windows
-} else {
-    toConvertArr = data.split('\n'); // Mac or Linux
-}
+// Then executes the converter and save the result on an string.
+let resultStr = numberConverter(toConvertArr);
 
-console.log(toConvertArr);
-
-let resultStr = romanNumbers(toConvertArr);
-
-// Finally, we will write the result's array on another file
+// Finally, we will write the result on another file.
 fs.writeFileSync('roman-numbers-result.txt', 'SYNC: \n' + resultStr);
